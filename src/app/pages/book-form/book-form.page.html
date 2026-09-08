@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/books"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ heading }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="stacked">Title</ion-label>
+      <ion-input formControlName="title" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('title')">{{ fieldError('title') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Author</ion-label>
+      <ion-input formControlName="author" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('author')">{{ fieldError('author') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">ISBN</ion-label>
+      <ion-input formControlName="isbn" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('isbn')">{{ fieldError('isbn') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Genre</ion-label>
+      <ion-input formControlName="genre" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('genre')">{{ fieldError('genre') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Publication Year</ion-label>
+      <ion-input formControlName="publicationYear" type="number"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('publicationYear')">{{ fieldError('publicationYear') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Publisher</ion-label>
+      <ion-input formControlName="publisher" type="text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('publisher')">{{ fieldError('publisher') }}</ion-note>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea formControlName="description" [autoGrow]="true" rows="4"></ion-textarea>
+    </ion-item>
+    <ion-note color="danger" *ngIf="fieldError('description')">{{ fieldError('description') }}</ion-note>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">{{ submitLabel }}</ion-button>
+    <ion-button expand="block" fill="clear" [routerLink]="['/books']">Cancel</ion-button>
+  </form>
+</ion-content>

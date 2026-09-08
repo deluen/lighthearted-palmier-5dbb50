@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Book Management</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/books/new']">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      [(ngModel)]="query"
+      placeholder="Search by title or author"
+      (ionInput)="search()"
+      (ionClear)="clear()"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding" *ngIf="errorMessage">
+    <ion-badge color="danger">{{ errorMessage }}</ion-badge>
+  </div>
+
+  <ion-list *ngIf="books.length; else empty">
+    <ion-item *ngFor="let book of books">
+      <ion-label>
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.author }} · {{ book.genre }} · {{ book.publicationYear }}</p>
+        <p>ISBN {{ book.isbn }} — {{ book.publisher }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button [routerLink]="['/books', book.id, 'edit']">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="confirmDelete(book)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #empty>
+    <div class="ion-padding ion-text-center">
+      <p>No books found.</p>
+    </div>
+  </ng-template>
+</ion-content>
